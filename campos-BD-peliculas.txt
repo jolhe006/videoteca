@@ -1,0 +1,37 @@
+titulo
+actores principales
+año
+director
+estudio
+genero
+	-comedia
+	-drama
+	-sci-fi
+	-romantica
+	-terror
+	-accion
+	-fantasia
+	-biograficas
+	-documental
+	-animacion
+	-thriller
+	-girly
+	-Adaptación
+	-Asiatica
+	-Catastrofes
+	-musicales
+	-animacion
+	-Anime
+	-Gore
+
+idiomas
+	-español latino
+	-español de españa
+	-ingles
+	-otros
+formato
+	-dvd
+	-avi
+
+ubicacion del dvd
+categoria especial

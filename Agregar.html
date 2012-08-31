@@ -1,0 +1,427 @@
+<html>
+<head>
+<title>Videoteca - Agregar</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+body {
+	background-color: #000;
+}
+body,td,th {
+	font-size: 100%;
+	color: #FFF;
+}
+.vidFrame { 
+             position: absolute;
+             display: none;
+             background-color: #ffffff;
+             border: 1px solid #800000;
+             width: 435px;
+             height: 362px;
+             cursor: move;
+          }
+</style>
+<script language="javascript">
+function chkd2lst(frm,fld)
+    {
+		var t="";var s=",  ";var flag=0;
+		for(var i=0;i<document[frm].elements["_"+fld].length;i++)
+			{			
+			if(document[frm].elements["_"+fld][i].checked)
+				{
+				if(flag==1){t+=s+document[frm].elements["_"+fld][i].value;}				
+				else{flag=1;t+=document[frm].elements["_"+fld][i].value;}
+				}
+			}	
+			
+		document[frm].elements[fld].value=t;
+		//valido genero
+		if (document[frm].elements[fld].value.length==0)
+		{ 
+			 alert("Tiene que seleccionar por lo menos un genero.") 
+			 document[frm].elements[fld].focus() 
+			 return 0; 
+		}
+		return 1;
+	
+    }
+///////////////////////////////////////////////////////////////////////////////////
+function validarEntero(valor){ 
+     	//intento convertir a entero. 
+     //si era un entero no le afecta, si no lo era lo intenta convertir 
+     valor = parseInt(valor) 
+
+     	//Compruebo si es un valor numérico 
+     	if (isNaN(valor)) { 
+           	 //entonces (no es numero) devuelvo el valor cadena vacia 
+           	 return "" 
+     	}else{ 
+           	 //En caso contrario (Si era un número) devuelvo el valor 
+           	 return valor 
+     	} 
+}
+
+function validar()
+{ 
+   	//valido el titulo
+   	if (document.ficha.titulo.value.length==0)
+	{ 
+      	 alert("Tiene que escribir el titulo de la pelicula") 
+      	 document.ficha.titulo.focus() 
+      	 return 0; 
+   	} 
+	
+	//valido actores
+	if (document.ficha.actores.value.length==0)
+	{ 
+      	 alert("Tiene que escribir por lo menos un actor");
+      	 document.ficha.actores.focus();
+      	 return 0; 
+   	}
+
+   	//valido el año. tiene que ser entero mayor que 1900 y menor que el año actual 
+	var today = new Date();
+   	año = document.ficha.año.value 
+   	año = validarEntero(año)
+   	document.ficha.año.value=año 
+   	if (año=="")
+	{
+		alert("Tiene que introducir un número entero en el año.");
+		document.ficha.año.value = today.getFullYear();
+		document.ficha.año.focus();
+		return 0; 
+   	}
+	else
+	{ 		
+      	 if (año<1900 | año > today.getFullYear())
+		 { 
+         	 alert("El año debe ser mayor a 1900 y menor que " + today.getFullYear());
+			 document.ficha.año.value = today.getFullYear();
+         	 document.ficha.año.focus() ;
+         	 return 0; 
+      	 } 
+   	} 
+	
+	//valido el director
+	if (document.ficha.director.value.length==0)
+	{ 
+      	 alert("Tiene que escribir el nombre del director") 
+      	 document.ficha.director.focus();
+      	 return 0; 
+   	}
+	
+	//valido el estudio
+	if (document.ficha.estudio.value.length==0)
+	{ 
+      	 alert("Tiene que escribir el nombre del estudio") 
+      	 document.ficha.estudio.focus() 
+      	 return 0; 
+   	}	
+	
+	if(!chkd2lst('ficha','genero'))
+	{
+		return 0;		
+	}
+
+   	//valido el idioma 
+   	if (document.ficha.idioma.selectedIndex==0)
+	{ 
+      	 alert("Debe seleccionar un idioma") 
+      	 document.ficha.idioma.focus() 
+      	 return 0; 
+   	} 
+	
+	//valido el formato 
+   	if (document.ficha.formato.selectedIndex==0)
+	{ 
+      	 alert("Debe seleccionar un formato") 
+      	 document.ficha.formato.focus() 
+      	 return 0; 
+   	} 
+	
+	//valido la ubicacion
+	if (document.ficha.ubicacion.value.length==0)
+	{ 
+      	 alert("Tiene que escribir la ubicacion") 
+      	 document.ficha.ubicacion.focus() 
+      	 return 0; 
+   	}
+	
+	//valido el categoria 
+   	if (document.ficha.categoria.selectedIndex==0)
+	{ 
+      	 alert("Debe seleccionar una categoria") 
+      	 document.ficha.categoria.focus() 
+      	 return 0; 
+   	}		
+	
+	document.ficha.submit();
+	 
+} 
+///////////////////////////////////////////////////////////////////////////////////	
+
+function onEnter(ev)
+ {  
+  if(ev==13)
+    { 
+	validar();
+    } 
+ }	
+	
+</script>
+</head>
+
+<body>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <th colspan="3" scope="col"><img src="baner3.png" width="500" height="150" alt="VIDEOTECA"></th>
+  </tr>
+  <tr>
+    <th width="25%" bgcolor="#000000" scope="row">&nbsp;</th>
+    <td width="50%"><div align="center">
+      <p>
+        <input type="submit" value="Buscar" align="center" onClick="window.location='Index.html'">
+        <input type="submit" value="Modificar" align="center"onClick="window.location='Modificar.html'">
+        <input type="submit" value="Agregar" align="center" >
+        <input type="submit" value="Eliminar" align="center"onclick="window.location='Eliminar.html'">
+      </p>
+      <p>&nbsp;</p>
+    </div></td>
+    <td width="25%">&nbsp;</td>
+  </tr>
+  <tr><th bgcolor="#000000" scope="row">&nbsp;</th>
+    
+    <td height="350" bgcolor="#000000"><form name="ficha" method="post" action="Agregar.php" enctype="multipart/form-data">
+      <table border="0" width="800" align="left" cellpadding="0" cellspacing="0" onKeyUp="onEnter(event.keyCode);">        
+        <tr>             
+        
+        <td align="center" width="40%" height="450" rowspan="10"><div>SIN IMAGEN </div></td>
+        
+
+<td width="68" align="right" valign="top">Titulo</td>
+        <td  width="495" align="left" valign="top"><input align="middle" name="titulo" type="text" maxlength="30"  placeholder = "Alemaneitor 3" x-webkit-speech autofocus></td>
+        </tr>
+                
+        <tr>
+        <td width="68" align="right" valign="top">Actores</td>
+        <td width="495" align="left" valign="top" ><input name="actores" type="text" maxlength="90" placeholder = "Jack Nicholson" x-webkit-speech >
+        </td>        
+        </tr>        
+ 
+ <tr> 
+ <td width="68" align="right" valign="top">Año:</td>
+ <td width="495" align="left" valign="top"> <input name="año" type="text" placeholder="1986" x-webkit-speech></tr>
+   
+ <tr>
+   	<td width="68" align="right" valign="top">Director: </td>    
+    <td width="495" align="left" valign="top">
+    <input name="director" type="text" maxlength="25" placeholder = "Alfred Hitchcock" x-webkit-speech>
+    </td>
+ </tr>
+   
+   <tr>
+   	<td width="68" align="right" valign="top">Estudio: </td>    
+    <td width="495" align="left" valign="top">
+    <input name="estudio" type="text" maxlength="25" placeholder = "Warner Bros." x-webkit-speech >
+    </td>
+ </tr>
+ 
+ <tr>
+   	<td width="68" align="right" valign="top">Genero: </td>  
+    <input name="genero" value="" type="hidden">  
+    <td width="495" align="left" valign="top">
+        <table border="0">
+              <tr>
+                <td><label>
+          <input type="checkbox" name="_genero" value="accion" id="genero_0">
+          Accion</label></td>
+                
+                <td><label>
+          <input type="checkbox" name="_genero" value="adaptacion" id="genero_1">
+          Adaptacion</label></td>
+          
+                <td><label>
+          <input type="checkbox" name="_genero" value="animacion" id="genero_2">
+          Animacion</label></td>
+          
+                <td><label>
+          <input type="checkbox" name="_genero" value="anime" id="genero_3">
+          Anime</label> </td> 
+          </tr>
+                
+              <tr>          
+          		<td><label>
+          <input type="checkbox" name="_genero" value="aventura" id="genero_4">
+          Aventura</label></td>
+          
+                <td><label>
+          <input type="checkbox" name="_genero" value="biografica" id="genero_5">
+          Biografica</label></td>          
+                
+            
+                <td><label>
+          <input type="checkbox" name="_genero" value="catastrofe" id="genero_6">
+          Catastrofe</label></td>          
+                          
+                <td><label>
+          <input type="checkbox" name="_genero" value="comedia" id="genero_7">
+          Comedia</label></td> 
+          </tr>
+                
+           <tr> 
+          		<td><label>
+          <input type="checkbox" name="_genero" value="crimen" id="genero_8">
+          Crimen</label></td> 
+          
+          		<td><label>
+          <input type="checkbox" name="_genero" value="deporte" id="genero_9">
+          Deporte</label></td>
+          
+                <td><label>
+          <input type="checkbox" name="_genero" value="documental" id="genero_10">
+          Documental</label></td>
+          
+           		<td><label>
+          <input type="checkbox" name="_genero" value="drama" id="genero_11">
+          Drama</label></td>
+          </tr>
+          
+           <tr>
+          <td><label>
+          <input type="checkbox" name="_genero" value="familiar" id="genero_12">
+          Familiar</label></td>
+          
+                
+                <td><label>
+          <input type="checkbox" name="_genero" value="fantasia" id="genero_13">
+          Fantasia</label></td>
+                
+              <td><label>
+          <input type="checkbox" name="_genero" value="game-show" id="genero_14">
+          Game-Show</label></td>
+          
+                <td><label>
+          <input type="checkbox" name="_genero" value="girly" id="genero_15">
+          Girly</label></td>
+              </tr>
+          
+           <tr>
+                <td><label>
+          <input type="checkbox" name="_genero" value="gore" id="genero_16">
+          Gore</label></td>
+          
+          		<td><label>
+          <input type="checkbox" name="_genero" value="guerra" id="genero_17">
+          Guerra</label></td>
+          
+         		<td><label>
+          <input type="checkbox" name="_genero" value="historia" id="genero_18">
+          Historia</label></td>
+          
+          		<td><label>
+          <input type="checkbox" name="_genero" value="misterio" id="genero_19">
+          Misterio</label></td>
+          </tr>
+          
+           <tr>
+          		<td><label>
+          <input type="checkbox" name="_genero" value="musica" id="genero_20">
+          Musica</label></td>
+               
+                <td><label>
+          <input type="checkbox" name="_genero" value="musicales" id="genero_21">
+          Musicales</label></td>
+          
+          		<td><label>
+          <input type="checkbox" name="_genero" value="occidental" id="genero_22">
+          Occidental</label></td>
+          
+          		<td><label>
+          <input type="checkbox" name="_genero" value="reality-tv" id="genero_23">
+          Reality-TV</label></td>
+          </tr>
+               
+                <td><label>
+          <input type="checkbox" name="_genero" value="romantica" id="genero_24">
+          Romantica</label></td>
+               
+                <td><label>
+          <input type="checkbox" name="_genero" value="si-fi" id="genero_25">
+          Si-fi</label></td>
+                           
+                <td><label>
+          <input type="checkbox" name="_genero" value="terror" id="genero_26">
+          Terror</label></td>
+               
+                <td><label>
+          <input type="checkbox" name="_genero" value="thriller" id="genero_27">
+          Thrille</label></td>
+          </tr>
+               
+                <td></td>
+               
+                <td></td>
+              </tr>
+            </table>  
+    </td>
+ </tr>
+ 
+ <tr>
+   	<td width="68" align="right" valign="top">Idioma: </td>    
+    <td width="495" align="left" valign="top">
+    <select name="idioma">
+        <option value="">--elije el idioma--</option>
+        <option value="Español latino" >Español latino</option>
+        <option value="Español de españa">Español de españa</option>
+        <option value="Ingles">Ingles</option>
+      </select>
+    </td>
+ </tr>
+ 
+ <tr>
+   	<td width="68" align="right" valign="top">Formato: </td>    
+    <td width="495" align="left" valign="top">
+    <select name="formato" size="0">
+        <option value="" selected>--elije el formato--</option>
+        <option value="DVD" >DVD</option>
+        <option value="AVI">AVI</option>
+      </select>
+    </td>
+ </tr>
+ 
+ <tr>
+   	<td width="68" align="right" valign="top">Ubicacion: </td>    
+    <td width="495" align="left" valign="top">
+    <input name="ubicacion" type="text" maxlength="25" placeholder = "Caja #2" x-webkit-speech >
+    </td>
+ </tr>
+ <tr>
+   	<td width="68" align="right" valign="top">Categoria: </td>    
+    <td width="495" align="left" valign="top">
+    <select name="categoria">
+        <option value="">--elije la categoria--</option>
+        <option value="popoteca">Popoteca</option>
+        <option value="ninguna">Ninguna</option>
+      </select>
+    </td>
+ </tr>
+ <tr><td width="337" align="right"><input type="file" name="imagen" align="center"></td></tr>
+ 
+        <tr>
+          <td height="85" colspan="6"><div align="center">
+            
+            <input type="button" value="Agregar" align="center" onClick="validar()">
+          </div></td>
+        </tr>
+  </table>
+<footer align="center">
+	<a href="http://www.w3.org/html/logo/">
+	<img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-device-semantics.png" width="197" height="64" alt="HTML5 Powered with CSS3 / Styling, Device Access, and Semantics" title="HTML5 Powered with CSS3 / Styling, Device Access, and Semantics">
+	</a>
+</footer> 
+
+</form></td>
+  </tr>
+
+</body>
+
+</html>
